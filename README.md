@@ -15,5 +15,5 @@
 1. No canto esquerdo, o terceiro símbolo é o Controle de Versão. 
 2. Selecione todos os arquivos que forem modificados e que você queira salvar clickando no `+` ao lado dele.
 3. Quando tiver selecionado todos, escreva uma breve frase no topo e clique em `Commit`.
-4. Irá aparecer uma nova aba no Menu a esquerda, clique na seta para cima para enviar suas modificações ao servidor.
+4. Irá aparecer um novo botão com "Sincronizar mudanças", clique-o!
 
