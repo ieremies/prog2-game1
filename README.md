@@ -9,3 +9,10 @@
 5. Rode `poetry install` para que ele instale tudo que é necessário para o nosso projeto.
 6. Rode `poetry shell` para entrar no ambiente virtual que o *poetry* criou para gente.
 7. Rode `python3 src/game.py`
+
+## Como "salvar" suas alterações?
+
+1. No canto esquerdo, o terceiro símbolo é o Controle de Versão. 
+2. Selecione todos os arquivos que forem modificados e que você queira salvar clickando no `+` ao lado dele.
+3. Quando tiver selecionado todos, escreva uma breve frase no topo e clique em `Commit`.
+
