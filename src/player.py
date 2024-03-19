@@ -1,6 +1,9 @@
 
 import pygame
 
+width = 800
+height = 800
+
 # Define Player class
 class Player(pygame.sprite.Sprite):
     def __init__(self):
