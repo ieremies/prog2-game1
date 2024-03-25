@@ -1,6 +1,11 @@
-import pygame
+try:
+    import pygame
+except ImportError:
+    print("Pygame não está instalado. Instale-o com 'pip3 install pygame'")
+    print("Confira o README.md para mais informações.")
+    exit()
+
 import sys
-import random
 import player
 import point
 
@@ -17,13 +22,16 @@ width = 800
 height = 800
 screen = pygame.display.set_mode((width, height))
 
-
-# Defini a cor branco(player)
+# Define a cor branco(player)
 white = (255, 255, 255)
 
 # bolinhas
 # TODO: Faça o mesmo processo que fizemos para criar um jogador
-# Lembre de colocá-las num grupo/
+# Lembre de colocá-las num grupo
+group_points = pygame.sprite.Group()
+for _ in range(3):
+    group_points.add(point.Point())
+
 
 # Cria um relógio
 clock = pygame.time.Clock()
@@ -43,6 +51,14 @@ while running:
     group_player.draw(screen)
 
     # TODO: Lembre de desenhas as bolinhas e atualizar a posição delas
+
+    # TODO conferir colisão usando pygame.sprite.spritecollide(grupo1, grupo2, True)
+
+    # TODO você pode usar sons da seguinte forma:
+    # sound = pygame.mixer.Sound("sound.wav")
+    # pygame.mixer.Sound.play(sound)
+    # Você pode baixar sons de efeitos sonoros gratuitos em https://mixkit.co/free-sound-effects/
+    # ou https://www.findsounds.com/category.html
 
     pygame.display.flip()
     clock.tick(60)
