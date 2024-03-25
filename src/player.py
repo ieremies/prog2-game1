@@ -1,24 +1,33 @@
+"""
+Classe que implementa o Jogador.
+"""
 
 import pygame
 
-width = 800
-height = 800
+screen_width = 800
+screen_height = 800
+
 
 # Define Player class
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
-        # Cria uma imagem 50 x 50 e preenche com uma cor
-        self.image = pygame.Surface((50, 50))
-        self.image.fill((0, 128, 255))
+        self.width = 32
+        self.height = 32
+
+        # Carrega a imagem do jogador
+        self.image = pygame.image.load("img/shrek.png")
+        self.image = pygame.transform.scale(self.image, (self.width, self.height))
 
         # Define essa propriedade chamada mov_speed
         self.mov_speed = 5
 
-        # Cria o rectângulo que representa ele, a image acima é só a visualização dele.
-        self.rect = self.image.get_rect()               # pega as mesmas dimensões da imagem
-        self.rect.center = (width // 2, height // 2)    # posição inicial do jogador
+        # Cria a hitbox do jogador
+        self.rect = self.image.get_rect()
+
+        # Inicia ele no centro
+        self.rect.center = (screen_width // 2, screen_height // 2)
 
     def move(self, keys):
         """
@@ -26,9 +35,12 @@ class Player(pygame.sprite.Sprite):
         """
         if keys[pygame.K_w] and self.rect.top > 0:
             self.rect.y -= self.mov_speed
-        if keys[pygame.K_s] and self.rect.bottom < height:
+        if keys[pygame.K_s] and self.rect.bottom < screen_height:
             self.rect.y += self.mov_speed
         if keys[pygame.K_a] and self.rect.left > 0:
             self.rect.x -= self.mov_speed
-        if keys[pygame.K_d] and self.rect.right < width:
+        if keys[pygame.K_d] and self.rect.right < screen_width:
             self.rect.x += self.mov_speed
+
+        # TODO Se o seu jogador é na verdade um balão, ele não deveria se mover
+        # mais rápido para baixo do que para cima?
