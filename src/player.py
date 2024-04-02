@@ -4,8 +4,10 @@ Classe que implementa o Jogador.
 
 import pygame
 
-screen_width = 800
-screen_height = 800
+screen_width = 400
+screen_height = 600
+
+
 
 
 # Define Player class
@@ -13,15 +15,15 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
-        self.width = 32
-        self.height = 32
+        self.width = 100
+        self.height = 100
 
         # Carrega a imagem do jogador
         self.image = pygame.image.load("img/shrek.png")
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
 
         # Define essa propriedade chamada mov_speed
-        self.mov_speed = 5
+        self.mov_speed = 25
 
         # Cria a hitbox do jogador
         self.rect = self.image.get_rect()

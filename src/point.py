@@ -14,8 +14,8 @@ class Point(pygame.sprite.Sprite):
         super().__init__()
 
         # Tamanho do ponto
-        self.width = 32
-        self.height = 32
+        self.width = 50
+        self.height = 50
 
         # Carrega a imagem do ponto e a redimensiona
         self.image = pygame.image.load("img/donkey.png")
@@ -25,15 +25,16 @@ class Point(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         # Posiciona o ponto em uma posição aleatória
-        self.rect.x = random.randint(0, 19) * 32
-        self.rect.y = random.randint(0, 14) * 32
+        
+        self.rect.x = random.randint(50, 350) * 1
+        #A resolução de 
+        self.rect.y = -50
 
     def update(self):
         """
         Atualiza a posição do ponto.
         """
-        self.rect.x = random.randint(0, 19) * 32
-        self.rect.y = random.randint(0, 14) * 32
+        self.rect.y = self.rect.y + 5
 
         # TODO: da forma como está, o que acontece?
         # TODO: como fazer com que o ponto apareça no topo da tela e "caia"?
