@@ -15,15 +15,15 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
-        self.width = 100
-        self.height = 100
+        self.width = 120
+        self.height = 300
 
         # Carrega a imagem do jogador
-        self.image = pygame.image.load("img/shrek.png")
+        self.image = pygame.image.load("img/balao.png")
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
 
         # Define essa propriedade chamada mov_speed
-        self.mov_speed = 25
+        self.mov_speed = 10
 
         # Cria a hitbox do jogador
         self.rect = self.image.get_rect()
