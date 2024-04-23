@@ -18,15 +18,14 @@ p = player.Player()
 group_player = pygame.sprite.Group()
 group_player.add(p)
 
-
-# build up our point
-po1 = point.Point()
+# cria o primeiro ponto
 group_point = pygame.sprite.Group()
-group_point.add (po1)
+group_point.add(point.Point())
 
-nuv = nuvem.Nuvem()
+# cria a primeira nuvem
 group_nuvens = pygame.sprite.Group()
-group_nuvens.add (nuv)
+for _ in range(3):
+    group_nuvens.add(nuvem.Nuvem())
 
 # Configura o display
 width = 400
@@ -36,24 +35,18 @@ screen = pygame.display.set_mode((width, height))
 # Define a cor branco(player)
 white = (135, 206, 235)
 
-# bolinhas
-# TODO: Faça o mesmo processo que fizemos para criar um jogador
-# Lembre de colocá-las num grupo
-group_points = pygame.sprite.Group()
-
-
-for _ in range(3):
-    group_points.add(point.Point())
-
 # Cria um relógio
 clock = pygame.time.Clock()
 running = True
 
 sound = pygame.mixer.Sound("sound.wav")
 
-contador_burro = 0
+contador_point = 0
 contador_nuvem = 0
-limite_contador_burro = 100
+limite_contador_point = 100
+limite_contador_nuvem = 60
+
+pontuacao = 0
 
 while running:
     screen.fill(white)  # pinta a tela de branco
@@ -63,43 +56,43 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+    group_nuvens.update()
+    group_nuvens.draw(screen)
+    group_point.update()
+    group_point.draw(screen)
+
     # um dicionário: keys[pygame.K_w] é True se a tecla w foi pressionada
     keys = pygame.key.get_pressed()
     p.move(keys)
-    
-    
-    group_nuvens.draw(screen)
-    group_point.draw(screen)
     group_player.draw(screen)
-    group_nuvens.update()
-    group_point.update()
 
-    contador_burro += 1
-    if contador_burro == limite_contador_burro:
+    contador_point += 1
+    if contador_point == limite_contador_point:
         group_point.add(point.Point())
-        contador_burro = 0
-        if limite_contador_burro > 20:
-            limite_contador_burro -= 1
+        contador_point = 0
+        if limite_contador_point > 20:
+            limite_contador_point -= 1
 
-    limite_contador_nuvem = 60
     contador_nuvem += 1
     if contador_nuvem == limite_contador_nuvem:
         group_nuvens.add(nuvem.Nuvem())
         contador_nuvem = 0
 
-
-    # TODO: Lembre de desenhas as bolinhas e atualizar a posição delas
-
-    # TODO conferir colisão usando pygame.sprite.spritecollide(grupo1, grupo2, True)
     if pygame.sprite.spritecollide(p, group_point, True):
         pygame.mixer.Sound.play(sound)
+        # pisca a tela de vermelho
+        screen.fill((255, 0, 0))
+        pontuacao -= (height - p.rect.y) // 10
 
+    # para cada ponto, se estiver depois do player, adiciona 1 ponto
+    for po in group_point:
+        if po.rect.y > p.rect.y:
+            pontuacao += 1
 
-    # TODO você pode usar sons da seguinte forma:
-    
-    
-    # Você pode baixar sons de efeitos sonoros gratuitos em https://mixkit.co/free-sound-effects/
-    # ou https://www.findsounds.com/category.html
+    # desenha a pontuação
+    font = pygame.font.Font(None, 36)
+    text = font.render(str(pontuacao), True, (0, 0, 0))
+    screen.blit(text, (10, 10))
 
     pygame.display.flip()
     clock.tick(60)

@@ -8,15 +8,12 @@ screen_width = 400
 screen_height = 600
 
 
-
-
-# Define Player class
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
         self.width = 120
-        self.height = 300
+        self.height = 180
 
         # Carrega a imagem do jogador
         self.image = pygame.image.load("img/balao.png")
@@ -26,7 +23,10 @@ class Player(pygame.sprite.Sprite):
         self.mov_speed = 10
 
         # Cria a hitbox do jogador
+        # Um retângulo de 60x60
         self.rect = self.image.get_rect()
+        self.rect.width = 60
+        self.rect.height = 60
 
         # Inicia ele no centro
         self.rect.center = (screen_width // 2, screen_height // 2)

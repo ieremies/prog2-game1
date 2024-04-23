@@ -1,5 +1,5 @@
 """
-Classe que implementa um Ponto que o jogador deve coletar.
+Classe que implementa um Ponto que o jogador deve desviar.
 """
 
 import pygame
@@ -25,9 +25,9 @@ class Point(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         # Posiciona o ponto em uma posição aleatória
-        
+
         self.rect.x = random.randint(50, 350) * 1
-        #A resolução de 
+        # A resolução de
         self.rect.y = -50
 
         self.velocidade = 2
@@ -36,9 +36,9 @@ class Point(pygame.sprite.Sprite):
         """
         Atualiza a posição do ponto.
         """
-        
+
         self.rect.y = self.rect.y + self.velocidade
         self.velocidade = self.velocidade + 0.5
 
-        # TODO: da forma como está, o que acontece?
-        # TODO: como fazer com que o ponto apareça no topo da tela e "caia"?
+        if self.rect.y > 700:
+            self.kill()

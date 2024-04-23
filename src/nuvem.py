@@ -1,5 +1,5 @@
 """
-Classe que implementa um Ponto que o jogador deve coletar.
+Classe que implementa uma Nuvem.
 """
 
 import pygame
@@ -9,7 +9,7 @@ import random
 class Nuvem(pygame.sprite.Sprite):
     def __init__(self):
         """
-        Ao ser instanciado, cria um ponto em uma posição aleatória.
+        Inicializa a nuvem.
         """
         super().__init__()
 
@@ -25,10 +25,10 @@ class Nuvem(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         # Posiciona o ponto em uma posição aleatória
-        
+
         self.rect.x = random.randint(-50, 450)
-        #A resolução de 
-        self.rect.y = -500
+        # A resolução de
+        self.rect.y = -100
 
     def update(self):
         """
@@ -36,5 +36,6 @@ class Nuvem(pygame.sprite.Sprite):
         """
         self.rect.y = self.rect.y + 2
 
-        # TODO: da forma como está, o que acontece?
-        # TODO: como fazer com que o ponto apareça no topo da tela e "caia"?
+        # deleta o objeto se estiver fora da tela
+        if self.rect.y > 700:
+            self.kill()
